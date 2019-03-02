@@ -7,10 +7,10 @@ y0  y1      yn
 z0  z1  ... zn
 1  1        1
 """
-import math
+from math import sin, cos, degrees
 
 def make_translate( x, y, z ):
-    translation = [ [1, 0 ,0 ,x], [0, 1, 0, y], [0, 0, 1, c], [0, 0, 0, 1] ]
+    translation = [ [1, 0 ,0 ,x], [0, 1, 0, y], [0, 0, 1, z], [0, 0, 0, 1] ]
     return translation
 
 def make_scale( x, y, z ):
@@ -20,28 +20,28 @@ def make_scale( x, y, z ):
 def make_rotX( theta ):
     translation = new_matrix()
     translation[0] = [1, 0, 0, 0]
-    translation[1] = [0, cos(degrees(theta)), -1 * sin(degrees(theta)), 0]
-    translation[2] = [sin(degrees(theta)), cos(degrees(thetha)), 1, 0]
+    translation[1] = [0, int(cos(degrees(theta))), -1 * int(sin(degrees(theta))), 0]
+    translation[2] = [int(sin(degrees(theta))), int(cos(degrees(theta))), 1, 0]
     translation[3] = [0, 0, 0, 1]
     return translation
 
 def make_rotY( theta ):
     translation = new_matrix()
-    translation[0] = [cos(degrees(theta)), 0, sin(degrees(theta)), 0]
+    translation[0] = [int(cos(degrees(theta))), 0, int(sin(degrees(theta))), 0]
     translation[1] = [0, 1, 0, 0]
-    translation[2] = [-1 * sin(degrees(theta)), 0, cos(degrees(theta)), 0]
+    translation[2] = [-1 * int(sin(degrees(theta))), 0, int(cos(degrees(theta))), 0]
     translation[3] = [0, 0, 0, 1]
     return translation
 
 
 def make_rotZ( theta ):
     translation = new_matrix()
-    translation[0] = [cos(degrees(theta)), -1 * sin(degrees(theta)), 0, 0]
-    translation[1] = [sin(degrees(theta)), cos(degrees(thetha)), 0, 0]
+    translation[0] = [int(cos(degrees(theta))), -1 * int(sin(degrees(theta))), 0, 0]
+    translation[1] = [int(sin(degrees(theta))), int(cos(degrees(theta))), 0, 0]
     translation[2] = [0, 0, 1, 0]
     translation[3] = [0, 0, 0, 1]
     return translation
-    pass
+
 
 #print the matrix such that it looks like
 #the template in the top comment
