@@ -7,37 +7,48 @@ y0  y1      yn
 z0  z1  ... zn
 1  1        1
 """
-from math import sin, cos, degrees
+from math import sin, cos, pi
 
 def make_translate( x, y, z ):
-    translation = [ [1, 0 ,0 ,x], [0, 1, 0, y], [0, 0, 1, z], [0, 0, 0, 1] ]
-    return translation
+    trans = new_matrix()
+    trans[0] = [1, 0, 0, 0]
+    trans[1] = [0, 1, 0, 0]
+    trans[2] = [0, 0, 1, 0]
+    trans[3] = [x, y , z, 1]
+    return trans
 
 def make_scale( x, y, z ):
-    translation = [ [x, 0, 0, 0], [0, y, 0, 0], [0, 0, z, 0], [0, 0, 0, 1] ]
-    return translation
+    trans = new_matrix()
+    trans = [ [x, 0, 0, 0], [0, y, 0, 0], [0, 0, z, 0], [0, 0, 0, 1] ]
+    return trans
 
 def make_rotX( theta ):
+    theta = theta * pi/180
     translation = new_matrix()
+
     translation[0] = [1, 0, 0, 0]
-    translation[1] = [0, int(cos(degrees(theta))), -1 * int(sin(degrees(theta))), 0]
-    translation[2] = [int(sin(degrees(theta))), int(cos(degrees(theta))), 1, 0]
+    translation[1] = [0, cos(theta),  sin(theta), 0]
+    translation[2] = [0, -1 * sin(theta), cos(theta), 0]
     translation[3] = [0, 0, 0, 1]
     return translation
 
 def make_rotY( theta ):
+    theta = theta * pi/180
     translation = new_matrix()
-    translation[0] = [int(cos(degrees(theta))), 0, int(sin(degrees(theta))), 0]
+    
+    translation[0] = [cos(theta), 0, -1 * sin(theta), 0]
     translation[1] = [0, 1, 0, 0]
-    translation[2] = [-1 * int(sin(degrees(theta))), 0, int(cos(degrees(theta))), 0]
+    translation[2] = [sin(theta), 0, cos(theta), 0]
     translation[3] = [0, 0, 0, 1]
     return translation
 
 
 def make_rotZ( theta ):
+    theta = theta * pi/180
     translation = new_matrix()
-    translation[0] = [int(cos(degrees(theta))), -1 * int(sin(degrees(theta))), 0, 0]
-    translation[1] = [int(sin(degrees(theta))), int(cos(degrees(theta))), 0, 0]
+
+    translation[0] = [cos(theta), sin(theta), 0, 0]
+    translation[1] = [-1 * sin(theta), cos(theta), 0, 0]
     translation[2] = [0, 0, 1, 0]
     translation[3] = [0, 0, 0, 1]
     return translation
